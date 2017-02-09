@@ -29,7 +29,7 @@ namespace Games
         return View["view_all_games_by_title.cshtml", allGames];
       };
   // displays singular game title based on game title id
-      Get["/game/{id}"] = parameters => {
+      Get["/games/{id}"] = parameters => {
         Game game = Game.Find(parameters.id);
         return View["game_title.cshtml", game];
       };
