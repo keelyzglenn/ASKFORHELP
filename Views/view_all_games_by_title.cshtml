@@ -6,7 +6,7 @@
 <ul>
   @foreach (var game in Model)
   {
-    <li><a href="/games/@Model.GetId()">@Model.GetName()</a></li>
+    <li><a href="/games/@game.GetId()">@game.GetName()</a></li>
   }
 </ul>
 <p><a href="/games/add">Add another game</a></p>

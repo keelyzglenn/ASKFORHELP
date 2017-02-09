@@ -2,11 +2,13 @@ using System.Collections.Generic;
 
 namespace Games.Objects
 {
-  public class Game{
-    private string _title;
+  public class Game
+  {
+    private string _name;
+    private int _id;
     private static List<Game> _instances = new List<Game>{};
 
-    public Game(string gameName);
+    public Game(string gameName)
     {
       _name = gameName;
       _instances.Add(this);
