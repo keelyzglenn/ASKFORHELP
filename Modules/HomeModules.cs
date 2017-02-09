@@ -13,6 +13,7 @@ namespace Games
       Get["/"] = _ => {
         return View["index.cshtml"];
       };
+
     // this returns the list of game consoles
       Get["/console/add"] = _ => {
         var AllGameConsoles = GameConsole.GetAll();
@@ -23,7 +24,7 @@ namespace Games
         return View["console_add.cshtml"];
       };
     // posts the new game console from the form onto the list
-      Post["/view_all_games_by_console"] = _ => {
+      Post["/gameConsoles"] = _ => {
         var newGameConsole = new GameConsole(Request.Form["console-name"]);
         var AllGameConsoles = GameConsole.GetAll();
         return View["view_all_games_by_console.cshtml", AllGameConsoles];
@@ -37,7 +38,7 @@ namespace Games
         model.Add("games", consoleGames);
         return View["console.cshtml", model];
       };
-      Get["/gameconsoles/{id}/games/new"] = parameters => {
+      Get["/gameConsoles/{id}/games/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
         GameConsole selectedGameConsole = GameConsole.Find(parameters.id);
         List<Game> allGames = selectedGameConsole.GetGames();
@@ -45,7 +46,7 @@ namespace Games
         model.Add("games", allGames);
         return View["games_add.cshtml", model];
       };
-      Post["/view_all_games_by_title"] = = _ => {
+      Post["/view_all_games_by_title"] = _ => {
         Dictionary<string, object> model = new Dictionary<string, object>();
         GameConsole selectedGameConsole = GameConsole.Find(Request.Form["consoleName-id"]);
         List<Game> consoleGames = selectedGameConsole.GetGames();

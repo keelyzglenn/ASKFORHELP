@@ -5,6 +5,6 @@
 }
 @foreach (var gameConsole in Model)
 {
-  <h3><a href='/consoles/@gameConsole.GetId()'>@gameConsole.GetName()</a></h3>
+  <h3><a href='/gameConsoles/@gameConsole.GetId()'>@gameConsole.GetConsoleName()</a></h3>
 }
 <p><a href='/'>Back home</a></p>

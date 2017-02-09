@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-
+using Games.Objects;
 namespace GameConsoles.Objects
 {
   public class GameConsole
@@ -46,5 +46,5 @@ namespace GameConsoles.Objects
     {
       return _instances[searchId -1];
     }
-  }  
+  }
 }
