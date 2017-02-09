@@ -2,8 +2,9 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<h1>Add a new game:</h1>
-<form action = "/all_games_by_title" method ="post">
+<h1>Add a new game to @Model["gameConsole"].GetName()</h1>
+<form action="/all_games_by_title" method="post">
+  <input id for="consoleName-id" name="consoleName-id" type="hidden" value='@Model["gameConsole"].GetId()'>
   <label for="new-game">Game Title:</label>
   <input id="new-game" name= "new-game" type ="text">
   <button type="submit">Submit</button>

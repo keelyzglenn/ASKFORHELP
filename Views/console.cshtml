@@ -1,0 +1,9 @@
+<h3>Here are all the games in for this console type:</h3>
+<ol>
+@foreach (var game in @Model["games"])
+{
+  <li>@game.GetName()</li>
+}
+</ol>
+<p><a href='/gameConsoles/@Model["gameConsole"].GetId()/games/new'>Add a new task</a></p>
+<p><a href='/'>Return to Main Page</a></p>
