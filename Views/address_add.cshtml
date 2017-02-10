@@ -1,0 +1,15 @@
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h1>Add a new address to @Model["contact"].GetName()</h1>
+<form action="/address/add" method="post">
+  <input id='consoleName-id' name='consoleName-id' type='hidden' value='@Model["contact"].GetId()'>
+  <label for='new-street'>Add a street</label>
+  <input id='new-street' name='new-street' type='text'>
+  <label for='new-city'>Add a city</label>
+  <input id='new-city' name='new-city' type='text'>
+  <label for='new-state'>Add a state</label>
+  <input id='new-state' name='new-state' type='text'>
+  <button type='submit'>Add task</button>
+</form>

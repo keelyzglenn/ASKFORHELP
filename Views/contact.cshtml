@@ -1,0 +1,20 @@
+@* /contacts/{id} *@
+
+@{
+  Layout="Shared/_Layout.cshtml";
+}
+
+<h1>Contact information</h1>
+<h2>@Model["contact"].GetName()</h2>
+ <h3>Address details:</h3>
+<ol>
+  @foreach (var address in @Model["address"])
+  {
+    <li>@address.GetStreet()</li>
+    <li>@address.GetCity()</li>
+    <li>@address.GetState()</li>
+  }
+</ol>
+
+<p><a href='/contact/@Model["contact"].GetId()/address/new'>Add</a></p>
+<p><a href="/">View Contacts</a></p>

@@ -1,61 +1,63 @@
 using Nancy;
-using Games.Objects;
+using Addresses.Objects;
 using System;
 using System.Collections.Generic;
-using GameConsoles.Objects;
+using Contacts.Objects;
 
-namespace Games
+namespace Contacts
 {
   public class HomeModule : NancyModule
   {
     public HomeModule()
     {
       Get["/"] = _ => {
-        return View["index.cshtml"];
+        List<Contact> allContacts = Contact.GetAll();
+        return View["index.cshtml", allContacts];
       };
 
-    // this returns the list of game consoles
-      Get["/console/add"] = _ => {
-        var AllGameConsoles = GameConsole.GetAll();
-        return View["view_all_games_by_console.cshtml", AllGameConsoles];
+    // this returns the list of address consoles
+      Get["/contact/new"] = _ => {
+        var AllContacts = Contact.GetAll();
+        return View["index.cshtml", AllContacts];
       };
     // shows the console add form
-      Get["/console/add"] = _ => {
-        return View["console_add.cshtml"];
+      Get["/contact/new"] = _ => {
+        return View["contact_add.cshtml"];
       };
-    // posts the new game console from the form onto the list
-      Post["/gameConsoles"] = _ => {
-        var newGameConsole = new GameConsole(Request.Form["console-name"]);
-        var AllGameConsoles = GameConsole.GetAll();
-        return View["view_all_games_by_console.cshtml", AllGameConsoles];
+    // posts the new address console from the form onto the list
+      Post["/contact/created"] = _ => {
+        var newContact = new Contact(Request.Form["contact-name"]);
+        return View["created.cshtml", newContact];
       };
 
-      Get["/gameConsoles/{id}"] = parameters => {
+      Get["/contact/{id}"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        var selectedGameConsole = GameConsole.Find(parameters.id);
-        var consoleGames = selectedGameConsole.GetGames();
-        model.Add("gameConsole", selectedGameConsole);
-        model.Add("games", consoleGames);
-        return View["console.cshtml", model];
+        var selectedContact = Contact.Find(parameters.id);
+        var contactAddress = selectedContact.GetAddress();
+        model.Add("contact", selectedContact);
+        model.Add("address", contactAddress);
+        return View["created.cshtml", model];
       };
-      Get["/gameConsoles/{id}/games/new"] = parameters => {
+      Get["/contact/{id}/address/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        GameConsole selectedGameConsole = GameConsole.Find(parameters.id);
-        List<Game> allGames = selectedGameConsole.GetGames();
-        model.Add("gameConsole", selectedGameConsole);
-        model.Add("games", allGames);
-        return View["games_add.cshtml", model];
+        Contact selectedContact = Contact.Find(parameters.id);
+        List<Address> allAddress = selectedContact.GetAddress();
+        model.Add("contact", selectedContact);
+        model.Add("address", allAddress);
+        return View["address_add.cshtml", model];
       };
-      Post["/view_all_games_by_title"] = _ => {
+      Post["/address/add"] = _ => {
         Dictionary<string, object> model = new Dictionary<string, object>();
-        GameConsole selectedGameConsole = GameConsole.Find(Request.Form["consoleName-id"]);
-        List<Game> consoleGames = selectedGameConsole.GetGames();
-        string gameTitle = Request.Form["new-game"];
-        Game newGame = new Game(gameTitle);
-        consoleGames.Add(newGame);
-        model.Add("games", consoleGames);
-        model.Add("gameConsole", selectedGameConsole);
-        return View["console.cshtml", model];
+        Contact selectedContact = Contact.Find(Request.Form["consoleName-id"]);
+        List<Address> contactAddress = selectedContact.GetAddress();
+        string addressStreet = Request.Form["new-street"];
+        string addressCity = Request.Form["new-city"];
+        string addressState = Request.Form["new-state"];
+        Address newAddress = new Address(addressStreet, addressCity, addressState);
+        contactAddress.Add(newAddress);
+        model.Add("address", contactAddress);
+        model.Add("contact", selectedContact);
+        return View["contact.cshtml", model];
       };
     }
   }

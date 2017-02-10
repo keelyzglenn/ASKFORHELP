@@ -2,8 +2,11 @@
   Layout="Shared/_Layout.cshtml";
 }
 
-<h1> Welcome to your game directory</h1>
+<h1>Address Book</h1>
 
-<p><a href="/console/add">Add a game console</a></p>
-<p><a href="/view_all_games_by_title">Search by game title</a></p>
-<p><a href="/gameConsoles">Search by game console</a></p>
+@foreach (var contact in Model)
+{
+  <h3><a href='/contact/@contact.GetId()'>@contact.GetName()</a></h3>
+}
+
+<p><a href="/contact/new">Add a contact</a></p>
