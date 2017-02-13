@@ -15,16 +15,16 @@ namespace Contacts
         return View["index.cshtml", allContacts];
       };
 
-    // this returns the list of address consoles
+    // this returns the list of address
       Get["/contact/new"] = _ => {
         var AllContacts = Contact.GetAll();
         return View["index.cshtml", AllContacts];
       };
-    // shows the console add form
+    // shows the contact add form
       Get["/contact/new"] = _ => {
         return View["contact_add.cshtml"];
       };
-    // posts the new address console from the form onto the list
+    // posts the new address from the form onto the list
       Post["/contact/created"] = _ => {
         var newContact = new Contact(Request.Form["contact-name"]);
         return View["created.cshtml", newContact];
