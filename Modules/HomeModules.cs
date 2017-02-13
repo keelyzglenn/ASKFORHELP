@@ -31,7 +31,7 @@ namespace Contacts
         var contactAddress = selectedContact.GetAddress();
         model.Add("contact", selectedContact);
         model.Add("address", contactAddress);
-        return View["created.cshtml", model];
+        return View["details.cshtml", model];
       };
       Get["/contact/{id}/address/new"] = parameters => {
         Dictionary<string, object> model = new Dictionary<string, object>();
